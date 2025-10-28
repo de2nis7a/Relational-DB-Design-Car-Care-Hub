@@ -1,7 +1,3 @@
-# ----- CRITICAL: IGNORE DATA FILES -----
-# This file contains sensitive INSERT statements and MUST NOT be published.
-data_population.sql
-
 # Ignore other potential data files or dumps
 *.dump
 *.backup
