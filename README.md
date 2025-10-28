@@ -1,48 +1,81 @@
-# Relational-DB-Design-Car-Care-Hub
-An advanced PostgreSQL schema for a car service business, featuring business logic triggers, 3NF normalization, and performance indexes.
+# 🧰 Relational-DB-Design-Car-Care-Hub
+An advanced PostgreSQL database schema for a car service business — featuring enforced business logic, 3NF normalization, and performance-driven indexing.
 
-# Relational Database Design: Car Service Hub
+# 🚗 Relational Database Design: Car Service Hub
 
-This repository contains the complete database schema for a comprehensive "Car Service Hub" application. This project is not just a collection of tables, but a fully designed, normalized, and optimized relational database built in PostgreSQL.
+This repository contains the complete PostgreSQL schema for a full-featured **Car Service Hub** system.  
+It’s not just a set of tables, but a well-structured, normalized, and optimized relational database built to model a real-world car service enterprise.
 
-It serves as a capstone project demonstrating database architecture, data integrity, and the implementation of advanced business logic at the database level.
+The project serves as a **capstone demonstration** of database architecture, normalization, and embedded business logic at the SQL level.
 
-## Project Overview
+---
 
-The database is designed to manage all operations of a multi-location car repair and service business. It models the complex relationships between customers, their vehicles, service bookings, parts inventory, staff assignments, and invoicing.
+## 🏗️ Project Overview
 
-## Key Features & Demonstrated Skills
+The database models the full workflow of a multi-location car service business.  
+It captures complex relationships between **customers, vehicles, bookings, inventory, staff,** and **invoicing** while enforcing data integrity and scalability.
 
-This schema demonstrates a deep understanding of database design principles and advanced PostgreSQL features.
+---
 
-### 1. Database Architecture (3NF)
-The schema is designed in Third Normal Form (3NF) to reduce data redundancy and improve data integrity. This is visible in the normalization of entities:
-* **Staff & Qualifications:** `staff`, `qualification`, and the `staff_qualification` junction table.
-* **Services & Departments:** `department` and `dept_type` lookup table.
-* **Parts & Inventory:** `part`, `part_category`, and `manufacturer`.
+## ⚙️ Key Features & Demonstrated Skills
 
-### 2. Advanced Data Integrity
-Data integrity is enforced at the database level through a rigorous set of constraints:
-* **Primary and Foreign Keys** to maintain relational integrity.
-* **`UNIQUE` constraints** on business keys (e.g., `role_name`, `part_oem_number`).
-* **`CHECK` constraints** to enforce business rules (e.g., `part_quantity >= 0`, `service_cost > 0`).
-* **Custom Data Types** (`CREATE TYPE ... AS ENUM`) for fields like `booking_status` to ensure valid inputs.
+This project showcases advanced PostgreSQL design, emphasizing data consistency, normalization, and performance optimization.
 
-### 3. Performance Optimization
-The schema is pre-optimized for common query patterns using:
-* **`CREATE INDEX`:** Indexes are strategically placed on foreign keys and columns frequently used in `WHERE` clauses (e.g., `cust_last_name`, `car_reg`, `booking_status`) to accelerate query performance.
+---
 
-### 4. Embedded Business Logic (Triggers)
-The most advanced feature is the implementation of business logic directly within the database using a **Trigger Function**:
-* **`check_appointment_overlap()`**: This `PL/pgSQL` function runs as a `TRIGGER` before any `INSERT` or `UPDATE` on the `service_detail` table.
-* It automatically checks if the assigned staff member is already booked for an overlapping time slot on that day, preventing double-bookings and ensuring data validity at the source.
+### 1. 🧩 Database Architecture (3NF)
 
-## Schema Modules
+The schema follows **Third Normal Form (3NF)**, minimizing redundancy and ensuring data consistency.  
 
-The database is logically divided into several key modules:
+**Core design modules include:**
+- **Staff & Qualifications:** `staff`, `qualification`, and `staff_qualification` junction table.  
+- **Services & Departments:** `department` and `dept_type` lookup table.  
+- **Parts & Inventory:** `part`, `part_category`, and `manufacturer`.
 
-* **Customers & Cars:** Manages customer information and their associated vehicles.
-* **Staff & Departments:** Manages employees, their roles, qualifications, and the departments they belong to.
-* **Services & Inventory:** Defines the services offered by each department and manages the parts inventory from various manufacturers.
-* **Booking & Invoicing:** The core operational module, linking `booking`s to `car`s, `location`s, and `service_detail`s. It tracks service execution, staff assignments, parts used, and generates `invoice`s and `payment`s.
-* **Feedback:** A simple module for capturing customer feedback.
+---
+
+### 2. 🧱 Advanced Data Integrity
+
+Integrity is strictly enforced at the database level using multiple constraint layers:
+- **Primary & Foreign Keys** ensure relational consistency.  
+- **`UNIQUE` constraints** maintain data uniqueness (`role_name`, `part_oem_number`).  
+- **`CHECK` constraints** validate business rules (`part_quantity >= 0`, `service_cost > 0`).  
+- **Custom ENUM Types** (`booking_status`) guarantee valid, standardized input values.
+
+---
+
+### 3. 🚀 Performance Optimization
+
+Indexes are strategically designed for optimal performance:
+- **`CREATE INDEX`** used on foreign key columns and frequently filtered attributes such as `cust_last_name`, `car_reg`, and `booking_status`.  
+- This structure ensures efficient query execution for both analytical and transactional workloads.
+
+---
+
+### 4. 🧠 Embedded Business Logic (Triggers)
+
+Business intelligence is integrated directly within the database layer using **PL/pgSQL trigger functions**.
+
+#### 🔄 `check_appointment_overlap()`
+A pre-insert and pre-update trigger on `service_detail`:
+- Automatically detects overlapping bookings for the same staff member.
+- Prevents double scheduling by rejecting invalid inserts at the source.  
+- Guarantees **data integrity and operational accuracy** without relying on application logic.
+
+---
+
+## 🗂️ Schema Modules Overview
+
+| Module | Description |
+|--------|--------------|
+| **Customers & Cars** | Manages customers and their registered vehicles. |
+| **Staff & Departments** | Handles employees, their qualifications, and departmental structure. |
+| **Services & Inventory** | Defines offered services, tracks available parts and suppliers. |
+| **Bookings & Invoicing** | Core operational layer linking cars, services, staff, and payments. |
+| **Feedback** | Captures customer reviews and satisfaction data for business insight. |
+
+---
+
+## 👩‍💻 Author
+**Denisa R.**  
+*Computer Science Student – University of Portsmouth*
